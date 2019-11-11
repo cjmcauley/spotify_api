@@ -1,13 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Tracks from './Tracks.js';
+import HomePageContainer from './client/HomePageContainer.js';
 
 function App() {
   return (
-    <div className="App">
-      <Tracks />
-    </div>
+    <>
+     <HomePageContainer/>
+    </>
   );
 }
 
