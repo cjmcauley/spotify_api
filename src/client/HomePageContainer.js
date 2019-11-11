@@ -14,7 +14,7 @@ class HomePageContainer extends Component {
   }
   this.state = {
     loggedIn: token ? true : false,
-    topTracks: { }
+    topTracks: {}
   }
   }
   getHashParams() {
@@ -28,10 +28,25 @@ class HomePageContainer extends Component {
     }
     return hashParams;
   }
+
+  getTopTracks(){
+    spotifyApi.getMyTopTracks()
+      .then((response) => {
+        this.setState({
+          topTracks: response
+        });
+      })
+  }
+
   render() {
     return(
         <>
         <a href='http://localhost:8888'> Login to Spotify </a>
+        { this.state.loggedIn &&
+          <button onClick={() => this.getTopTracks()}>
+            Check Top Tracks
+          </button>
+        }
         <TracksComponent />
        </>
 
