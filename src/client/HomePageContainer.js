@@ -14,7 +14,7 @@ class HomePageContainer extends Component {
   }
   this.state = {
     loggedIn: token ? true : false,
-    topTracks: {}
+    topTracks: []
   }
   }
   getHashParams() {
@@ -33,7 +33,7 @@ class HomePageContainer extends Component {
     spotifyApi.getMyTopTracks()
       .then((response) => {
         this.setState({
-          topTracks: response
+          topTracks: response.items
         });
       })
   }
@@ -47,9 +47,8 @@ class HomePageContainer extends Component {
             Check Top Tracks
           </button>
         }
-        <TracksComponent />
+        <TracksComponent topTracks={this.state.topTracks}/>
        </>
-
     )
   }
 }
