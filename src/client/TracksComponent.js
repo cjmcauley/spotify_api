@@ -1,11 +1,17 @@
 import React from 'react';
 
-function TracksComponent(params) {
-    return(
+const TracksComponent = (props) => {
+    const activityNodes = props.topTracks.map((item, index)=> {
+        return (
+          <h2 key={index}>{item.artists[0].name}</h2>
+        )
+      });
+      return(
         <>
-        <h1>Tracks</h1>
+        {activityNodes}
         </>
-    )
-}
+      )
+    }
 
 export default TracksComponent;
+
