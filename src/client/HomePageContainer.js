@@ -16,7 +16,9 @@ class HomePageContainer extends Component {
   }
   this.state = {
     loggedIn: token ? true : false,
-    topTracks: []
+    topTracks: [], 
+    noOfTracks: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50], 
+    timeScale: ['last 4 weeks', 'last 6 months', 'all time']
   }
   }
   getHashParams() {
