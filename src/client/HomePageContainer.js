@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TracksComponent from './TracksComponent';
 import SpotifyWebApi from 'spotify-web-api-js';
+
 const spotifyApi = new SpotifyWebApi();
 
 class HomePageContainer extends Component {
@@ -11,6 +12,7 @@ class HomePageContainer extends Component {
     const token = params.access_token;
     if (token) {
     spotifyApi.setAccessToken(token);
+    this.getTopTracks()
   }
   this.state = {
     loggedIn: token ? true : false,
@@ -30,7 +32,7 @@ class HomePageContainer extends Component {
   }
 
   getTopTracks(){
-    spotifyApi.getMyTopTracks()
+    spotifyApi.getMyTopTracks({limit: 5, time_range: 'long_term'})
       .then((response) => {
         this.setState({
           topTracks: response.items
@@ -42,11 +44,6 @@ class HomePageContainer extends Component {
     return(
         <>
         <a href='http://localhost:8888'> Login to Spotify </a>
-        { this.state.loggedIn &&
-          <button onClick={() => this.getTopTracks()}>
-            Check Top Tracks
-          </button>
-        }
         <TracksComponent topTracks={this.state.topTracks}/>
        </>
     )
