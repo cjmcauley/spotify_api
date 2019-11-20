@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TracksComponent from './TracksComponent';
 import SpotifyWebApi from 'spotify-web-api-js';
+import DropdownComponent from './DropdownComponent';
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -18,7 +19,9 @@ class HomePageContainer extends Component {
     loggedIn: token ? true : false,
     topTracks: [], 
     noOfTracks: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50], 
-    timeScale: ['last 4 weeks', 'last 6 months', 'all time']
+    timeScale: ['last 4 weeks', 'last 6 months', 'all time'], 
+    setTracks: 5, 
+    setTimeScale: 'long_term'
   }
   }
   getHashParams() {
@@ -40,12 +43,23 @@ class HomePageContainer extends Component {
           topTracks: response.items
         });
       })
+    
+  }
+
+  changeTopTracks(){
+    spotifyApi.getMyTopTracks({limit: this.state.setTracks, time_range: this.state.setTimeScale})
+      .then((response) => {
+        this.setState({
+          topTracks: response.items
+        });
+      })
   }
 
   render() {
     return(
         <>
         <a href='http://localhost:8888'> Login to Spotify </a>
+        <DropdownComponent noOfTracks={this.state.noOfTracks} timeScale={this.state.timeScale} />
         <TracksComponent topTracks={this.state.topTracks}/>
        </>
     )
