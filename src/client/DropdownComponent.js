@@ -19,6 +19,11 @@ class DropdownComponent extends Component {
     return (
       <div>
         <Typography>Select How Many Tracks to See</Typography>
+        <Dropdown
+          options={this.props.noOfTracks}
+          onChange={this._onSelect}
+          placeholder="Select an option"
+        />
       </div>
     );
   }
