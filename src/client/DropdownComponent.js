@@ -6,7 +6,11 @@ import "./styles.css";
 class DropdownComponent extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selected: ""
+    };
 
+    this.onSelect = this.onSelect.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -15,13 +19,20 @@ class DropdownComponent extends Component {
     this.props.changeTopTracks();
   };
 
+  onSelect(option) {
+    this.setState({ selected: option.value });
+  }
+
   render() {
+    const defaultOption = this.state.selected;
+
     return (
       <div>
         <Typography>Select How Many Tracks to See</Typography>
         <Dropdown
           options={this.props.noOfTracks}
-          onChange={this._onSelect}
+          onChange={this.onSelect}
+          value={defaultOption}
           placeholder="Select an option"
         />
       </div>
