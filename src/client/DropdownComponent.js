@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Slider from "@material-ui/core/Slider";
+import Dropdown from "react-dropdown";
 import Typography from "@material-ui/core/Typography";
 import "./styles.css";
 
@@ -19,9 +18,7 @@ class DropdownComponent extends Component {
   render() {
     return (
       <div>
-        <Typography id="discrete-slider" gutterBottom>
-          Select How Many Tracks to See
-        </Typography>
+        <Typography>Select How Many Tracks to See</Typography>
       </div>
     );
   }
