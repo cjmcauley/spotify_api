@@ -3,6 +3,8 @@ import Dropdown from "react-dropdown";
 import Typography from "@material-ui/core/Typography";
 import "./styles.css";
 
+const options = ["5", "10", "15", "20", "25", "30"];
+
 class DropdownComponent extends Component {
   constructor(props) {
     super(props);
@@ -10,17 +12,13 @@ class DropdownComponent extends Component {
       selected: ""
     };
 
-    this.onSelect = this.onSelect.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this._onSelect = this._onSelect.bind(this);
   }
 
-  handleChange = (index, value) => {
-    this.props.handleChangeTracks(index, value);
-    this.props.changeTopTracks();
-  };
-
-  onSelect(option) {
+  _onSelect(option) {
     this.setState({ selected: option.value });
+    this.props.handleChangeTracks(this.state.selected);
+    this.props.changeTopTracks();
   }
 
   render() {
@@ -30,10 +28,10 @@ class DropdownComponent extends Component {
       <div>
         <Typography>Select How Many Tracks to See</Typography>
         <Dropdown
-          options={this.props.noOfTracks}
-          onChange={this.onSelect}
+          options={options}
+          onChange={this._onSelect}
           value={defaultOption}
-          placeholder="Select an option"
+          placeholder="5"
         />
       </div>
     );
