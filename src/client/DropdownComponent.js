@@ -37,7 +37,7 @@ class DropdownComponent extends Component {
             options={days}
             onChange={this._onSelect}
             value={defaultOption}
-            placeholder="5"
+            placeholder="select number of tracks"
           />
         </div>
         <div>
@@ -46,7 +46,7 @@ class DropdownComponent extends Component {
             options={period}
             onChange={this._onSelect}
             value={defaultOption}
-            placeholder="5"
+            placeholder="select time period"
           />
         </div>
       </>
