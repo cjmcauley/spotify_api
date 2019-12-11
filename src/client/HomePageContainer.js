@@ -60,7 +60,11 @@ class HomePageContainer extends Component {
   }
 
   handleChangeTracks = value => {
-    this.setState({ setTracks: parseInt(value, 10) });
+    this.setState({ setTracks: value });
+  };
+
+  handleChangePeriod = value => {
+    this.setState({ setTimeScale: value });
   };
 
   render() {
@@ -72,6 +76,7 @@ class HomePageContainer extends Component {
           timeScale={this.state.timeScale}
           changeTopTracks={this.changeTopTracks}
           handleChangeTracks={this.handleChangeTracks}
+          handleChangePeriod={this.handleChangePeriod}
         />
         <TracksComponent topTracks={this.state.topTracks} />
       </>
