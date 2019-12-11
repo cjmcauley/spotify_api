@@ -14,20 +14,31 @@ class DropdownComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: ""
+      selectedTracks: "",
+      selectedPeriod: ""
     };
 
-    this._onSelect = this._onSelect.bind(this);
+    this._onSelectTracks = this._onSelectTracks.bind(this);
+    this._onSelectPeriod = this._onSelectPeriod.bind(this);
+    this.updateChoice = this.updateChoice.bind(this);
   }
 
-  _onSelect(option) {
-    this.setState({ selected: option.value });
-    this.props.handleChangeTracks(this.state.selected);
-    this.props.changeTopTracks();
+  _onSelectTracks(option) {
+    this.setState({ selectedTracks: option.value });
+  }
+
+  _onSelectPeriod(option) {
+    this.setState({ selectedPeriod: option.value });
+  }
+
+  updateChoice() {
+    this.props.handleChangeTracks(this.state.selectedTracks);
+    this.props.handleChangePeriod(this.state.selectedPeriod);
   }
 
   render() {
-    const defaultOption = this.state.selected;
+    const defaultOptionTracks = this.state.selectedTracks;
+    const defaultOptionPeriod = this.state.selectedPeriod;
 
     return (
       <>
@@ -35,8 +46,8 @@ class DropdownComponent extends Component {
           <Typography>Select How Many Tracks to See</Typography>
           <Dropdown
             options={days}
-            onChange={this._onSelect}
-            value={defaultOption}
+            onChange={this._onSelectTracks}
+            value={defaultOptionTracks}
             placeholder="select number of tracks"
           />
         </div>
@@ -44,11 +55,12 @@ class DropdownComponent extends Component {
           <Typography>Select Time Scale</Typography>
           <Dropdown
             options={period}
-            onChange={this._onSelect}
-            value={defaultOption}
+            onChange={this._onSelectPeriod}
+            value={defaultOptionPeriod}
             placeholder="select time period"
           />
         </div>
+        <button onClick={this.updateChoice}>Submit</button>
       </>
     );
   }
